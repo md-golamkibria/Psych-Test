@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Psychological Tests</title>
+    <meta name="description" content="A simplified, interactive Rorschach test for entertainment purposes only." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <span class="brand-mark">🧠</span>
+        <span class="brand-name">Psych Tests</span>
+      </div>
+      <button id="theme-toggle" class="btn icon-btn" type="button" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    </header>
+    <div id="app">
+      <!-- Home / Test chooser -->
+      <section id="screen-welcome" class="screen active" aria-labelledby="welcome-title">
+        <div class="card">
+          <h1 id="welcome-title" class="title">Choose a Test</h1>
+          <p class="tagline">Entertainment-only interactive experiences. Not a diagnosis.</p>
+          <div class="actions" style="margin-top: 12px;">
+            <button id="start-rorschach-btn" class="btn btn-primary" autofocus>Start Rorschach Test</button>
+            <button id="start-szondi-btn" class="btn">Start Szondi Test</button>
+          </div>
+          <p class="hint">Press Enter to start Rorschach</p>
+          <details class="disclaimer">
+            <summary>Read the disclaimer</summary>
+            <p>
+              These are simplified, educational tests for entertainment purposes only. They are not a
+              substitute for a psychological evaluation. Any interpretations should not be taken as
+              medical advice or diagnosis.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Test Screen -->
+      <section id="screen-test" class="screen" aria-live="polite" aria-labelledby="progress-label">
+        <div class="card">
+          <div class="topbar">
+            <div id="progress-label" class="progress">Card <span id="card-number">1</span> of 10</div>
+            <div class="progress-bar" aria-hidden="true">
+              <div id="progress-bar" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="image-wrap">
+            <img id="card-image" alt="Rorschach card" />
+            <div id="image-fallback" class="image-fallback" hidden>
+              Image not found. You can still answer the question below.
+            </div>
+          </div>
+
+          <div class="qa">
+            <p id="question" class="question">What might this be?</p>
+            <form id="answer-form" autocomplete="off">
+              <label class="sr-only" for="answer-input">Your answer</label>
+              <input id="answer-input" class="input" type="text" inputmode="text" placeholder="Type what you see…" required />
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+
+            <div id="gender-prompt" class="gender-prompt" hidden>
+              <span class="gender-label">Is it male or female?</span>
+              <div class="actions">
+                <button id="gender-male" class="btn" type="button">Male</button>
+                <button id="gender-female" class="btn" type="button">Female</button>
+              </div>
+            </div>
+
+            <div id="interpretation" class="interpretation" hidden></div>
+
+            <div class="actions">
+              <button id="next-btn" class="btn" type="button" hidden>Next card →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results Screen -->
+      <section id="screen-results" class="screen" aria-labelledby="results-title">
+        <div class="card">
+          <h2 id="results-title" class="title">Your Results</h2>
+          <ol id="results-list" class="results-list"></ol>
+          <div class="actions">
+            <button id="restart-btn" class="btn">Restart</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Szondi Test Screen -->
+      <section id="screen-szondi" class="screen" aria-labelledby="szondi-title">
+        <div class="card">
+          <h2 id="szondi-title" class="title">Szondi Test <span class="muted" style="font-weight: 500; font-size: 0.8em;">(Educational)</span></h2>
+          <p class="tagline">Which picture scares you the most? Select 1–8 below.</p>
+
+          <div class="szondi-image-wrap">
+            <img id="szondi-image" class="szondi-image" alt="Composite image with eight portraits labeled 1–8" />
+            <div id="szondi-image-fallback" class="image-fallback" hidden>
+              Image not found. Place the image in this folder named
+              <code>For Szondi test picture.png</code>, or rely on the included screenshot file in this folder.
+            </div>
+          </div>
+
+          <div class="choices" id="szondi-choices"></div>
+
+          <div id="szondi-result" class="interpretation" hidden></div>
+
+          <div class="actions">
+            <button id="szondi-back-btn" class="btn">Back to Home</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+      <small class="muted">For education and entertainment only. Not a diagnostic tool.</small>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
